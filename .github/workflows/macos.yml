@@ -52,4 +52,6 @@ jobs:
         cmake ../ -DHB_HAVE_CORETEXT=OFF -DHB_HAVE_FREETYPE=OFF
     - name: Build
       run: |
+        pwd
+        cd build
         make
