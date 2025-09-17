@@ -51,10 +51,15 @@ jobs:
           -Dauto_features=enabled \
           -Ddocs=disabled \
           -Dchafa=disabled \
-          -Dcoretext=enabled \
-          -Dgraphite=enabled \
+          -Dcoretext=disabled \
+          -Dgraphite=disabled \
           -Doptimization=2 \
     - name: Build
       run: meson compile -Cbuild
     - name: Test
       run: meson test --print-errorlogs -Cbuild
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-build
+        path: build/
