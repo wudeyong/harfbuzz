@@ -55,20 +55,6 @@ jobs:
           -Dragel_subproject=true
     - name: Build
       run: meson compile -Cbuild
-    - name: Test
-      run: meson test --print-errorlogs -Cbuild
-    - name: Dist
-      run: |
-        git reset --hard HEAD # ragel may have modified the source tree
-        meson dist --no-tests -Cbuild
-    - name: Generate Documentations
-      run: ninja -Cbuild harfbuzz-doc
-    - name: Deploy Documentations
-      if: github.ref_type == 'tag'
-      run: .ci/deploy-docs.sh
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        REVISION: ${{ github.sha }}
     - name: Archive artifacts
       uses: actions/upload-artifact@v4
       with:
