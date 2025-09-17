@@ -55,3 +55,8 @@ jobs:
         pwd
         cd build
         make
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: macos-build
+        path: build/
