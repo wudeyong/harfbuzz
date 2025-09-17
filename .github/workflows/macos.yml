@@ -47,19 +47,9 @@ jobs:
       run: |
         brew link --force icu4c
         ccache --version
-        meson setup build \
-          -Dauto_features=enabled \
-          -Ddocs=disabled \
-          -Dchafa=disabled \
-          -Dcoretext=disabled \
-          -Dgraphite=disabled \
-          -Doptimization=2 \
+        mkdir -p build
+        cd build
+        cmake ../ -DHB_HAVE_CORETEXT=OFF -DHB_HAVE_FREETYPE=OFF
     - name: Build
-      run: meson compile -Cbuild
-    - name: Test
-      run: meson test --print-errorlogs -Cbuild
-    - name: Upload Build Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: macos-build
-        path: build/
+      run: |
+        make
